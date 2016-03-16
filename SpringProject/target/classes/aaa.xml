@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+       <bean name="userService" class="com.endava.siv5l.userdetails.UserService" >
+              <property name="userOne" ref="accountOne" />
+              <property name="userTwo" ref="accountTwo" />
+       </bean>
+
+
+       <bean id="accountOne" class="com.endava.siv5l.userdetails.UserAccount">
+              <property name="firstName" value="${UserAccount.firstName}" />
+              <property name="lastName" value="${UserAccount.lastName}" />
+       </bean>
+
+
+       <bean id="accountTwo" class="com.endava.siv5l.userdetails.UserAccount">
+              <property name="firstName" value="Teodor" />
+              <property name="lastName" value="Mamolea" />
+       </bean>
+
+
+       <bean name="guestService" class="com.endava.siv5l.userdetails.GuestService" >
+              <property name="userThree"  ref="accountThree" />
+
+
+       </bean>
+
+       <bean id="accountThree" class="com.endava.siv5l.userdetails.UserAccount" >
+              <property name="firstName" value="Serghei" />
+              <property name="lastName" value="Motpan" />
+       </bean>
+
+       <!--
+      <bean class="com.endava.siv5l.userdetails.MyBeanFactoryPP" />
+       -->
+
+
+       <!-- PropertyPlaceholderConfigurer  initializeaza valorile-->
+       <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" >
+              <property name="locations" value="usersconfig.properties" />
+       </bean>
+
+
+       <!--
+       <bean id="square" class="com.endava.siv5l.spring.netexample.Square" >
+              <property name="type" value="Equilateral" />  contain cunoaste ce instantiem
+              <constructor-arg value="Isoscel" /> contain cunoaste ca el string-
+              <constructor-arg type="int" value="20" />  ontainerul cunoaste ce tip e arg
+              <constructor-arg index="0" value="20" />
+              <constructor-arg index="1" value="20" />
+       </bean>
+       -->
+
+
+       <!--
+       <bean id="triangle" class = "com.endava.siv5l.spring.netexample.Triangle" >  scope="Prototype"
+              <property name="pointA" ref="zeroPoint" /> //separat
+              <property name="pointB" ref="point2" />  //separat
+              <property name="pointB">
+                     <bean class="com.endava.siv5l.spring.netexample.Point" >
+                            <property name="x" value="-20" />
+                            <property name="y" value="0" />
+                     </bean>
+              </property>
+
+              <property name="pointC"  >
+                     <bean class="com.endava.siv5l.spring.netexample.Point">
+                            <property name="x" value="0" />
+                            <property name="y" value="20" />
+                     </bean>
+              </property>
+       </bean>
+        -->
+
+
+       <!--
+       <bean id="zeroPoint" class="com.endava.siv5l.spring.netexample.Point" >
+              <property name="x" value="0" />
+              <property name="y" value="0" />
+       </bean>
+        -->
+
+
+       <!--
+       <bean class="com.endava.siv5l.userdetails.DisplayNameBeanPostProccesor" /> //pentru beanPostprocessor
+       -->
+
+
+       <!--
+       <bean id="point2" class="com.endava.siv5l.spring.netexample.Point" >
+           <property name="x" value="-20" />
+           <property name="y" value="0" />     //acestia sunt specifice lui Triangle bean
+                                           //deci nu e necesar sa fie cross container
+                                           //le punem in ineteriorul beanului Triangle
+       </bean>
+       -->
+
+
+       <!--
+      <bean id="point3" class="com.endava.siv5l.spring.netexample.Point" >
+          <property name="x" value="0" />
+          <property name="y" value="20" />
+      </bean>
+      -->
+
+
+       <!--
+        <bean id="knight" class="com.endava.siv5l.spring.inaction.BraveKnight" >
+               <constructor-arg ref="quest" />
+               <constructor-arg ref="minstrel" />
+        </bean>
+
+        <bean id="quest" class="com.endava.siv5l.spring.inaction.SlayDragonQuest" >
+            <constructor-arg value="@{T(System).out}" />
+        </bean>
+
+        <bean id="minstrel" class="com.endava.siv5l.spring.inaction.Minstrel" >
+            <constructor-arg value = "#{T(System).out" />
+        </bean>
+        -->
+
+
+       <!--
+          <aop:config>
+              <aop:aspect ref="minstrel" >
+                  <aop:pointcut id="embark"
+                                expression="execution(* *.embarkOnQuest(..))"/>
+                  <aop:before pointcut-ref="embark"
+                              method="singBeforeQuest" />
+                  <aop:after pointcut-ref="embark"
+                              method="singAfterQuest" />
+              </aop:aspect>
+          </aop:config>
+      -->
+
+
+       <!-- <alias name="triangle" alias="alias-triangle" />  un nume adaugator pentru acelasi bean -->
+
+</beans>
